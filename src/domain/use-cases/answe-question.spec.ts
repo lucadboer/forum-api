@@ -1,17 +1,23 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { AnswerQuestionUseCase } from './answer-question'
-import { randomUUID } from 'crypto'
+import { InMemmoryAnswerRepository } from '../repository/in-memmory/in-memmory-answer-repository'
+
+let answerRepository: InMemmoryAnswerRepository
 
 describe('Answer Question Use Case', () => {
-  it('should be able to answer a question', () => {
-    const answerQuestion = new AnswerQuestionUseCase()
+  beforeEach(() => {
+    answerRepository = new InMemmoryAnswerRepository()
+  })
 
-    const answer = answerQuestion.execute({
-      instructorId: randomUUID(),
-      questionId: randomUUID(),
+  it('should be able to answer a question', async () => {
+    const answerQuestion = new AnswerQuestionUseCase(answerRepository)
+
+    const { content } = await answerQuestion.execute({
+      instructorId: 'instructor',
+      questionId: 'question',
       content: 'test response',
     })
 
-    expect(answer.content).toEqual('test response')
+    expect(content).toEqual('test response')
   })
 })
