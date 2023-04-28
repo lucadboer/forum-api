@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto'
 
-export class Question {
+export class Answer {
   public id: string
   public content: string
 
