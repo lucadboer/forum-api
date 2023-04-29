@@ -12,12 +12,12 @@ describe('Answer Question Use Case', () => {
   it('should be able to answer a question', async () => {
     const answerQuestion = new AnswerQuestionUseCase(answerRepository)
 
-    const { content } = await answerQuestion.execute({
+    const props = await answerQuestion.execute({
       instructorId: 'instructor',
       questionId: 'question',
       content: 'test response',
     })
 
-    expect(content).toEqual('test response')
+    expect(props.content).toEqual('test response')
   })
 })
