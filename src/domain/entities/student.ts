@@ -4,4 +4,12 @@ interface StudentProps {
   name: string
 }
 
-export class Student extends Entity<StudentProps> {}
+export class Student extends Entity<StudentProps> {
+  static create(name: string) {
+    const student = new Student({
+      name,
+    })
+
+    return student
+  }
+}
